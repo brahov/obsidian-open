@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Openen in Obsidian</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: -apple-system, Verdana, sans-serif; margin: 3rem 1rem; text-align: center; background: Canvas; color: CanvasText; }
+  a { font-size: 1.1rem; }
+</style>
+<script>
+  // Doorsturen naar Obsidian. Alles na # (vault en note) blijft op het apparaat: een browser stuurt het fragment
+  // nooit naar de server. Alleen obsidian://open is een doel, dus geen open redirect.
+  var h = location.hash.slice(1);
+  var doel = /^vault=[^&]+&file=[^&]+$/.test(h) ? "obsidian://open?" + h : null;
+  if (doel) { location.replace(doel); }
+</script>
+</head>
+<body>
+<p id="t">Openen in Obsidian...</p>
+<p><a id="a" href="#">Openen</a></p>
+<script>
+  if (doel) { document.getElementById("a").href = doel; }
+  else { document.getElementById("t").textContent = "Geen geldige verwijzing."; document.getElementById("a").remove(); }
+</script>
+</body>
+</html>
